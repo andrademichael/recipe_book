@@ -1,16 +1,33 @@
 <div class="jumbotron">
   <h1><%= @recipe.name %></h1>
+  <% if @tags.any? %>
+  <p>Tags:</p>
+    <% @tags.each() do |tag| %>
+    <%= tag.name() + ", "%>
+    <% end %>
+  <% else %>
+  <p>No tags added yet!</p>
+  <% end %>
 </div>
+
 <form class="well" action="/recipe/<%= @recipe.id %>/add_ingredient" method="post">
   <label for="ingredient_name">Enter the next ingredient:</label>
   <input type="text" id="ingredient_name" name="ingredient_name">
   <button type="submit">Add ingredient</button>
 </form>
+
 <form class="well" action="/recipe/<%= @recipe.id %>/add_instruction" method="post">
   <label for="instruction_name">Enter the next instruction:</label>
   <input type="text" id="instruction_name" name="instruction_name">
   <button type="submit">Add instruction</button>
 </form>
+
+<form class="well" action="/recipe/<%= @recipe.id %>/add_tag" method="post">
+  <label for="tag_name">Enter a recipe tag:</label>
+  <input type="text" id="tag_name" name="tag_name">
+  <button type="submit">Add tag</button>
+</form>
+
 <% if @ingredients.any? %>
 <h3>Ingredients:</h3>
 <ul>
@@ -21,6 +38,7 @@
 <% else %>
 <p>No ingredients added yet!</p>
 <% end %>
+
 <% if @instructions.any? %>
 <h3>Instructions:</h3>
 <ul>

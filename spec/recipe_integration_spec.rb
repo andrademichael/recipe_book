@@ -9,7 +9,10 @@ describe('adding a recipe object', {:type => :feature}) do
     click_button('Add ingredient')
     fill_in('instruction_name', :with => "eat all the things")
     click_button('Add instruction')
+    fill_in('tag_name', :with => "good food")
+    click_button("Add tag")
     expect(page).to have_content('tacos')
     expect(page).to have_content('eat all the things')
+    expect(page).to have_content('good food')
   end
 end

@@ -12,6 +12,7 @@ get('/recipe/:id') do
    @recipe = Recipe.find(recipe_id.to_i())
    @ingredients = Ingredient.all()
    @instructions = Instruction.all()
+   @tags = Tag.all()
   erb(:recipe)
 end
 
@@ -36,5 +37,12 @@ post("/recipe/:id/add_instruction") do
   instruction_name = params.fetch("instruction_name")
   recipe_id = params.fetch("id").to_i()
   @instruction = Instruction.create({:description => instruction_name})
+  redirect to("/recipe/#{recipe_id}")
+end
+
+post("/recipe/:id/add_tag") do
+  tag_name = params.fetch("tag_name")
+  recipe_id = params.fetch("id").to_i()
+  @tag = Tag.create({:name => tag_name})
   redirect to("/recipe/#{recipe_id}")
 end
