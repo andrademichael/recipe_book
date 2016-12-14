@@ -10,16 +10,24 @@ end
 get('/recipe/:id') do
    recipe_id = params.fetch("id")
    @recipe = Recipe.find(recipe_id.to_i())
+   @ingredients = Ingredient.all()
+   @instructions = Instruction.all()
   erb(:recipe)
 end
 
 post('/recipe') do
   recipe_name = params.fetch("recipe_name")
-
   @new_recipe = Recipe.new({:name => recipe_name})
   if @new_recipe.save
     redirect ("/recipe/#{@new_recipe.id()}")
   else
-    alert("you suck.")
+    erb(:errors)
   end
+end
+
+post("/recipe/:id/add_ingredient") do
+  ingredient_name = params.fetch("ingredient_name")
+  recipe_id = params.fetch("id").to_i()
+  @ingredient = Ingredient.create({:name => ingredient_name})
+  redirect to("/recipe/#{recipe_id}")
 end

@@ -1,1 +1,31 @@
-<h1><%= @recipe.name %></h1>
+<div class="jumbotron">
+  <h1><%= @recipe.name %></h1>
+</div>
+<form class="well" action="/recipe/<%= @recipe.id %>/add_ingredient" method="post">
+  <label for="ingredient_name">Enter the next ingredient:</label>
+  <input type="text" id="ingredient_name" name="ingredient_name">
+  <button type="submit">Add ingredient</button>
+</form>
+<form class="well" action="/recipe/<%= @recipe.id %>/add_instruction" method="post">
+  <label for="instruction_name">Enter the next instruction:</label>
+  <input type="text" id="instruction_name" name="instruction_name">
+  <button type="submit">Add instruction</button>
+</form>
+<% if @ingredients.any? %>
+<ul>
+  <% @ingredients.each() do |ingredient| %>
+    <li><%= ingredient.name() %></li>
+  <% end %>
+</ul>
+<% else %>
+<p>No ingredients added yet!</p>
+<% end %>
+<% if @instructions.any? %>
+<ul>
+  <% @instructions.each() do |instruction| %>
+    <li><%= instruction.name() %></li>
+  <% end %>
+</ul>
+<% else %>
+<p>No instructions added yet!</p>
+<% end %>
