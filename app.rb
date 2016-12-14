@@ -31,3 +31,10 @@ post("/recipe/:id/add_ingredient") do
   @ingredient = Ingredient.create({:name => ingredient_name})
   redirect to("/recipe/#{recipe_id}")
 end
+
+post("/recipe/:id/add_instruction") do
+  instruction_name = params.fetch("instruction_name")
+  recipe_id = params.fetch("id").to_i()
+  @instruction = Instruction.create({:description => instruction_name})
+  redirect to("/recipe/#{recipe_id}")
+end
