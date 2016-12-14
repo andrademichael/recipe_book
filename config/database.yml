@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: recipes_tags_development
+
+test:
+  adapter: postgresql
+  database: recipes_tags_test
