@@ -2,15 +2,21 @@
   <h1><%= @recipe.name %></h1>
   <% if @tags.any? %>
   <p>Tags:</p>
-    <% @tags.each() do |tag| %>
-    <%= tag.name() + ", "%>
-    <% end %>
+    <p>| <% @tags.each() do |tag| %>
+      <%= tag.name() %>
+      <form action="/tag/<%= tag.id %>" method="post">
+        <button type="submit">x</button>
+        <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
+        <input type="hidden" name="_method" value="delete">
+      </form> |
+      <% end %>
+    </p>
   <% else %>
   <p>No tags added yet!</p>
   <% end %>
 </div>
 
-<form class="well" action="/recipe/<%= @recipe.id %>/add_ingredient" method="post">
+<form class="well" action="/recipe/<% @recipe.id %>/add_ingredient" method="post">
   <label for="ingredient_name">Enter the next ingredient:</label>
   <input type="text" id="ingredient_name" name="ingredient_name">
   <button type="submit">Add ingredient</button>
